@@ -11,6 +11,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.quizzerapp.adapters.CategoryAdapter;
 import com.example.quizzerapp.models.CategoryModel;
+import com.example.quizzerapp.helpers.Path;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +25,9 @@ public class CategoryActivities extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private List<CategoryModel> categoryModels;
-
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference rootRef = database.getReference(Path.ROOT_PATH);
+    DatabaseReference categoriesRef = rootRef.child(Path.CATEGORY_PATH);
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -28,7 +36,7 @@ public class CategoryActivities extends AppCompatActivity {
         setContentView(R.layout.activity_category_activities);
         Toolbar toolbar = findViewById(R.id.toolbar_category);
 
-        //setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Categories");
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
 
@@ -43,6 +51,24 @@ public class CategoryActivities extends AppCompatActivity {
 
         CategoryAdapter categoryAdapter = new CategoryAdapter(categoryModels);
         recyclerView.setAdapter(categoryAdapter);
+
+
+        categoriesRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot snap : snapshot.getChildren()) {
+                    CategoryModel c = snap.getValue(CategoryModel.class);
+                    categoryModels.add(c);
+                }
+                categoryAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
 
     }

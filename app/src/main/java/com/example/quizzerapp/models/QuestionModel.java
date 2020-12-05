@@ -1,7 +1,7 @@
 package com.example.quizzerapp.models;
 
 public class QuestionModel {
-    private String question,optionA,optionB, optionC, optionD,currectAnsw;
+    private String question,optionA,optionB, optionC, optionD, correctAns;
     private int questionNum;
 
     public int getQuestionNum() {
@@ -18,7 +18,7 @@ public class QuestionModel {
         this.optionB = optionB;
         this.optionC = optionC;
         this.optionD = optionD;
-        this.currectAnsw = currectAnsw;
+        this.correctAns = currectAnsw;
         this.questionNum = questionNum;
     }
 
@@ -66,11 +66,11 @@ public class QuestionModel {
         this.optionD = optionD;
     }
 
-    public String getCurrectAnsw() {
-        return currectAnsw;
+    public String getCorrectAns() {
+        return correctAns;
     }
 
-    public void setCurrectAnsw(String currectAnsw) {
-        this.currectAnsw = currectAnsw;
+    public void setCorrectAns(String correctAns) {
+        this.correctAns = correctAns;
     }
 }

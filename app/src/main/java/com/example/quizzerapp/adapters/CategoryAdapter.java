@@ -35,7 +35,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.setData(categoryModelList.get(position).getImageUrl(),categoryModelList.get(position).getTitle());
+        holder.setData(categoryModelList.get(position).getImageUrl(),categoryModelList.get(position).getTitle(),categoryModelList.get(position).getSets());
     }
 
     @Override
@@ -54,17 +54,15 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             title = itemView.findViewById(R.id.title);
         }
 
-        private void setData(String url,final String title){
+        private void setData(String url,final String title,int sets){
             Glide.with(itemView.getContext()).load(url).into(circleImageView);
             this.title.setText(title);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent setIntent = new Intent(itemView.getContext(), SetsActivity.class);
-                    setIntent.putExtra("title",title);
-                    itemView.getContext().startActivity(setIntent);
-                }
+            itemView.setOnClickListener(v -> {
+                Intent setIntent = new Intent(itemView.getContext(), SetsActivity.class);
+                setIntent.putExtra("category",title);
+                setIntent.putExtra("sets",sets);
+                itemView.getContext().startActivity(setIntent);
             });
         }
 

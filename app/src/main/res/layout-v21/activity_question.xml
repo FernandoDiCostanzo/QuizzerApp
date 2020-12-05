@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.QuestionActivity">
+    tools:context=".QuestionActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_question"
@@ -123,9 +123,11 @@
         android:layout_marginLeft="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:background="@drawable/rounded_corners"
-        android:backgroundTint="#FA7074"
+        android:background="@drawable/button_rounded"
+        android:backgroundTintMode="screen"
         android:text="Share"
+        android:textColor="@color/black"
+        app:backgroundTint="#FA7074"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button_next"
         app:layout_constraintHorizontal_bias="0.5"
@@ -143,9 +145,9 @@
         android:enabled="false"
         android:text="Next"
         android:alpha="0.5"
-        android:textColor="@color/white"
-        android:background="@drawable/rounded_corners"
-        android:backgroundTint="#848484"
+        android:textColor="@color/black"
+        android:background="@drawable/button_rounded"
+        app:backgroundTint="#848484"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

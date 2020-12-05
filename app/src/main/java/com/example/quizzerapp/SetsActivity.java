@@ -28,7 +28,7 @@ private GridView gridView;
 
         gridView = findViewById(R.id.gridView);
 
-        GridAdapter gridAdapter = new GridAdapter(16);
+        GridAdapter gridAdapter = new GridAdapter(getIntent().getIntExtra("sets",0),getIntent().getStringExtra("category"));
         gridView.setAdapter(gridAdapter);
     }
 

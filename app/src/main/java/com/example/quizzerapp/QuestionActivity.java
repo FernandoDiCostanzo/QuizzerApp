@@ -10,19 +10,30 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.quizzerapp.helpers.Path;
 import com.example.quizzerapp.models.*;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionActivity extends AppCompatActivity {
 
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference rootRef = database.getReference(Path.ROOT_PATH);
+    DatabaseReference setsRef = rootRef.child(Path.SETS_PATH);
     private TextView question,noIndicator;
     private FloatingActionButton bookmark;
     private LinearLayout optionsContainer;
@@ -31,6 +42,8 @@ public class QuestionActivity extends AppCompatActivity {
     private List<QuestionModel> list;
     private int position = 0;
     private int score =0;
+    private int questionNum;
+    private String category;
 
 
     @Override
@@ -38,8 +51,11 @@ public class QuestionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
 
-        //Toolbar toolbar = findViewById(R.id.toolbar_question);
-        //setSupportActionBar(toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar_question);
+        setSupportActionBar(toolbar);
+
+        category = getIntent().getStringExtra("category");
+        questionNum = getIntent().getIntExtra("sets",1);
 
         question = findViewById(R.id.textView_question);
         noIndicator = findViewById(R.id.textView_number_indicator);
@@ -49,46 +65,66 @@ public class QuestionActivity extends AppCompatActivity {
         nextBtn = findViewById(R.id.button_next);
 
         list = new ArrayList<>();
-        /*
-        list.add(new QuestionModel("Question1","a","b","c","d","a"));
-        list.add(new QuestionModel("Question2","a","b","c","d","b"));
-        list.add(new QuestionModel("Question3","a","b","c","d","b"));
-        list.add(new QuestionModel("Question4","a","b","c","d","d"));
-        list.add(new QuestionModel("Question5","a","b","c","d","c"));
-        list.add(new QuestionModel("Question6","a","b","c","d","a"));
-        list.add(new QuestionModel("Question7","a","b","c","d","a"));
-        list.add(new QuestionModel("Question8","a","b","c","d","b"));
-        */
-        for(int i=0;i<4;i++){
-            optionsContainer.getChildAt(i).setOnClickListener(new View.OnClickListener() {
-                @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-                @Override
-                public void onClick(View v) {
-                    checkAnsw(((Button)v));
-                }
-            });
-        }
 
 
 
-        playAnim(question,0,list.get(position).getQuestion());
 
-        nextBtn.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+        setsRef.child(category)
+                .child("questions")
+                .orderByChild("questionNum")
+                .equalTo(questionNum)
+                .addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View v) {
-                nextBtn.setEnabled(false);
-                nextBtn.setAlpha(0.5f);
-                enableOption(true);
-                position++;
-                if(position == list.size()){
-                    //score activity
-                    return;
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot snap : snapshot.getChildren()) {
+                    QuestionModel q = snap.getValue(QuestionModel.class);
+                    list.add(q);
                 }
-                count = 0;
-                playAnim(question,0,list.get(position).getQuestion());
+                if(list.size()>0){
+
+                    for(int i=0;i<4;i++){
+                        optionsContainer.getChildAt(i).setOnClickListener(new View.OnClickListener() {
+                            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+                            @Override
+                            public void onClick(View v) {
+                                checkAnsw(((Button)v));
+                            }
+                        });
+                    }
+                    playAnim(question,0,list.get(position).getQuestion());
+                    nextBtn.setOnClickListener(new View.OnClickListener() {
+                        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+                        @Override
+                        public void onClick(View v) {
+                            nextBtn.setEnabled(false);
+                            nextBtn.setAlpha(0.5f);
+                            enableOption(true);
+                            position++;
+                            if(position == list.size()){
+                                //score activity
+                                return;
+                            }
+                            count = 0;
+                            playAnim(question,0,list.get(position).getQuestion());
+                        }
+                    });
+                }else{
+                    finish();
+                    Toast.makeText(QuestionActivity.this,"no questions",Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(QuestionActivity.this,error.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
+
+
+
+
+
 
     }
 
@@ -144,12 +180,12 @@ public class QuestionActivity extends AppCompatActivity {
         enableOption(false);
         nextBtn.setEnabled(true);
         nextBtn.setAlpha(1);
-        if(selectedOption.getText().equals(list.get(position).getCurrectAnsw())){
+        if(selectedOption.getText().equals(list.get(position).getCorrectAns())){
             score++;
             selectedOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00FF33")));
         }else{
             selectedOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#E62A2A")));
-            Button correctOption = (Button)optionsContainer.findViewWithTag(list.get(position).getCurrectAnsw());
+            Button correctOption = (Button)optionsContainer.findViewWithTag(list.get(position).getCorrectAns());
             correctOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00FF33")));
         }
     }
