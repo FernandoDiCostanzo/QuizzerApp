@@ -34,7 +34,7 @@ public class QuestionActivity extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference rootRef = database.getReference(Path.ROOT_PATH);
     DatabaseReference setsRef = rootRef.child(Path.SETS_PATH);
-    private TextView question,noIndicator;
+    private TextView question,noIndicator,textCategory;
     private FloatingActionButton bookmark;
     private LinearLayout optionsContainer;
     private Button shareBtn,nextBtn;
@@ -63,6 +63,9 @@ public class QuestionActivity extends AppCompatActivity {
         optionsContainer = findViewById(R.id.linearLayout_options);
         shareBtn = findViewById(R.id.button_share);
         nextBtn = findViewById(R.id.button_next);
+        textCategory = findViewById(R.id.textView_category);
+
+        textCategory.setText(category+" "+questionNum);
 
         list = new ArrayList<>();
 
