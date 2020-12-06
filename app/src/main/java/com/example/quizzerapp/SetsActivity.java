@@ -15,20 +15,24 @@ public class SetsActivity extends AppCompatActivity {
 private GridView gridView;
 
 
-    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sets);
 
         Toolbar toolbar = findViewById(R.id.toolbar_sets);
-        //setSupportActionBar(toolbar);
-        //getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
-        //getSupportActionBar().setTitle(getIntent().getStringExtra("title"));
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        String category = getIntent().getStringExtra("category");
+        int sets = getIntent().getIntExtra("sets",0);
+        String imageUrl = getIntent().getStringExtra("imageUrl");
+
+        getSupportActionBar().setTitle(category);
 
         gridView = findViewById(R.id.gridView);
 
-        GridAdapter gridAdapter = new GridAdapter(getIntent().getIntExtra("sets",0),getIntent().getStringExtra("category"));
+        GridAdapter gridAdapter = new GridAdapter(sets,category,imageUrl);
         gridView.setAdapter(gridAdapter);
     }
 

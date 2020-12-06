@@ -12,8 +12,8 @@
         android:id="@+id/toolbar_sets"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
-        style="@style/Theme.QuizzerApp"></androidx.appcompat.widget.Toolbar>
+        android:background="@drawable/rect_radient"
+        style="@style/Theme.Design.NoActionBar"></androidx.appcompat.widget.Toolbar>
 
     <TextView
         android:layout_width="match_parent"

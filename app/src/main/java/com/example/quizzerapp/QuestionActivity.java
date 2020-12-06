@@ -149,6 +149,7 @@ public class QuestionActivity extends AppCompatActivity {
                             intent.putExtra("score",score);
                             intent.putExtra("total",list.size());
                             startActivity(intent);
+                            finish();
                             return;
                         }
                         count = 0;

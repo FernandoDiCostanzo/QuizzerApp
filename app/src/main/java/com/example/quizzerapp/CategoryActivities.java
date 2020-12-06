@@ -1,17 +1,22 @@
 package com.example.quizzerapp;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.quizzerapp.adapters.CategoryAdapter;
 import com.example.quizzerapp.models.CategoryModel;
-import com.example.quizzerapp.helpers.Path;
+import com.example.quizzerapp.helpers.Utility;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,10 +31,12 @@ public class CategoryActivities extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<CategoryModel> categoryModels;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference rootRef = database.getReference(Path.ROOT_PATH);
-    DatabaseReference categoriesRef = rootRef.child(Path.CATEGORY_PATH);
+    DatabaseReference rootRef = database.getReference(Utility.ROOT_PATH);
+    DatabaseReference categoriesRef = rootRef.child(Utility.CATEGORY_PATH);
 
-    @SuppressLint("RestrictedApi")
+    private Dialog loadingDialog;
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +45,12 @@ public class CategoryActivities extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Categories");
-        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        loadingDialog = new Dialog(this);
+        loadingDialog.setContentView(R.layout.loading);
+        loadingDialog.getWindow().setLayout(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+        loadingDialog.setCancelable(false);
 
         recyclerView = findViewById(R.id.recyclerView);
 
@@ -52,7 +64,7 @@ public class CategoryActivities extends AppCompatActivity {
         CategoryAdapter categoryAdapter = new CategoryAdapter(categoryModels);
         recyclerView.setAdapter(categoryAdapter);
 
-
+        loadingDialog.show();
         categoriesRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -61,11 +73,13 @@ public class CategoryActivities extends AppCompatActivity {
                     categoryModels.add(c);
                 }
                 categoryAdapter.notifyDataSetChanged();
+                loadingDialog.dismiss();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Toast.makeText(CategoryActivities.this,error.getMessage(),Toast.LENGTH_SHORT);
+                loadingDialog.dismiss();
             }
         });
 

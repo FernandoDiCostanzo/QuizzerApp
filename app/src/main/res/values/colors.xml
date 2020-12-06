@@ -7,6 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="green">#FF00FF11</color>
 
     <color name="colorPrimary">#00FFEF</color>
     <color name="colorPrimaryDark">#00574B</color>
@@ -14,4 +15,10 @@
     <color name="colorSecondary">#56565C</color>
     <color name="itemBg">#CDCCD1</color>
     <color name="lightGray">#DADADA</color>
+
+    <color name="startGradient">#0FF8B3</color>
+    <color name="endGradient">#036ED9</color>
+
+    <color name="startGradient2">#FEC194</color>
+    <color name="endGradient2">#FF0061</color>
 </resources>

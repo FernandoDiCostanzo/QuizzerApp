@@ -7,8 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.quizzerapp.adapters.BookmarkAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.function.BooleanSupplier;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,11 +33,9 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        this.bookMarkButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
+        this.bookMarkButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, BookmarkActivity.class);
+            startActivity(intent);
         });
     }
 }

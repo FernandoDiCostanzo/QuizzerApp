@@ -12,8 +12,7 @@
         android:id="@+id/circle_image_view"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:src="@color/colorPrimary"
-        app:civ_border_width="2dp"/>
+        android:src="@color/colorPrimary" />
 
     <TextView
         android:id="@+id/title"

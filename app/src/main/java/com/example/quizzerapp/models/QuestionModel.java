@@ -1,18 +1,14 @@
 package com.example.quizzerapp.models;
 
 public class QuestionModel {
-    private String question,optionA,optionB, optionC, optionD, correctAns;
+    private String imageUrl,category,question,optionA,optionB, optionC, optionD, correctAns;
     private int questionNum;
-
-    public int getQuestionNum() {
-        return questionNum;
-    }
 
     public QuestionModel() {
         //default for firebase
     }
 
-    public QuestionModel(String question, String optionA, String optionB, String optionC, String optionD, String currectAnsw, int questionNum) {
+    public QuestionModel(String imageUrl, String category, String question, String optionA, String optionB, String optionC, String optionD, String currectAnsw, int questionNum) {
         this.question = question;
         this.optionA = optionA;
         this.optionB = optionB;
@@ -20,6 +16,28 @@ public class QuestionModel {
         this.optionD = optionD;
         this.correctAns = currectAnsw;
         this.questionNum = questionNum;
+        this.imageUrl = imageUrl;
+        this.category = category;
+    }
+
+    public int getQuestionNum() {
+        return questionNum;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public void setQuestionNum(int questionNum) {

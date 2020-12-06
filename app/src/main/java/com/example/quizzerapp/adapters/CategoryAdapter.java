@@ -43,6 +43,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         return categoryModelList.size();
     }
 
+
+
+
+
     class ViewHolder extends RecyclerView.ViewHolder{
 
         private CircleImageView circleImageView;
@@ -54,12 +58,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             title = itemView.findViewById(R.id.title);
         }
 
-        private void setData(String url,final String title,int sets){
+        private void setData(String url,String title,int sets){
             Glide.with(itemView.getContext()).load(url).into(circleImageView);
             this.title.setText(title);
 
             itemView.setOnClickListener(v -> {
                 Intent setIntent = new Intent(itemView.getContext(), SetsActivity.class);
+                setIntent.putExtra("imageUrl",url);
                 setIntent.putExtra("category",title);
                 setIntent.putExtra("sets",sets);
                 itemView.getContext().startActivity(setIntent);

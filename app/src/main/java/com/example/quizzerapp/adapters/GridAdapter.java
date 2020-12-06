@@ -21,11 +21,31 @@ public class GridAdapter extends BaseAdapter {
     }
 
     private int sets = 0 ;
-    private String category;
+    private String category,imageUrl;
 
-    public GridAdapter(int sets,String category) {
+    public GridAdapter(int sets,String category,String imageUrl) {
         this.category = category;
         this.sets = sets;
+        this.imageUrl = imageUrl;
+    }
+
+    public GridAdapter() {
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     @Override
@@ -58,6 +78,7 @@ public class GridAdapter extends BaseAdapter {
                 Intent questionIntent = new Intent(parent.getContext(), QuestionActivity.class);
                 questionIntent.putExtra("category",category);
                 questionIntent.putExtra("sets",position+1);
+                questionIntent.putExtra("imageUrl",imageUrl);
                 parent.getContext().startActivity(questionIntent);
             }
         });
