@@ -65,7 +65,7 @@ public class CategoryActivities extends AppCompatActivity {
         recyclerView.setAdapter(categoryAdapter);
 
         loadingDialog.show();
-        categoriesRef.addValueEventListener(new ValueEventListener() {
+        categoriesRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot snap : snapshot.getChildren()) {

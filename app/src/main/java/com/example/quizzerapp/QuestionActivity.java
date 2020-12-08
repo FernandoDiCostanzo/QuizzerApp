@@ -118,7 +118,7 @@ public class QuestionActivity extends AppCompatActivity {
                 .child("questions")
                 .orderByChild("questionNum")
                 .equalTo(questionNum)
-                .addValueEventListener(new ValueEventListener() {
+                .addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot snap : snapshot.getChildren()) {
