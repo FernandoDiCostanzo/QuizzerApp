@@ -209,7 +209,7 @@ public class QuestionActivity extends AppCompatActivity {
                     }else if(count == 3){
                         option = list.get(position).getOptionD();
                     }
-
+//
                     playAnim(optionsContainer.getChildAt(count),0,option);
                     count++;
                 }
