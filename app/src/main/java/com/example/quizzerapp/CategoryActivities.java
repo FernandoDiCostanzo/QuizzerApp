@@ -63,7 +63,7 @@ public class CategoryActivities extends AppCompatActivity {
 
         CategoryAdapter categoryAdapter = new CategoryAdapter(categoryModels);
         recyclerView.setAdapter(categoryAdapter);
-
+//
         loadingDialog.show();
         categoriesRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
