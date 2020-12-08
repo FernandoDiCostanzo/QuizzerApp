@@ -9,6 +9,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
@@ -42,9 +43,10 @@ public class QuestionActivity extends AppCompatActivity {
 
 
 
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference rootRef = database.getReference(Utility.ROOT_PATH);
-    DatabaseReference setsRef = rootRef.child(Utility.SETS_PATH);
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference rootRef = database.getReference(Utility.ROOT_PATH);
+    private DatabaseReference setsRef = rootRef.child(Utility.SETS_PATH);
+
     private TextView question,noIndicator,textCategory;
     private FloatingActionButton bookmarkBtn;
     private LinearLayout optionsContainer;
@@ -64,6 +66,7 @@ public class QuestionActivity extends AppCompatActivity {
 
     private int matchedQuestionPosition;
 
+    ValueEventListener setsRefValueEventListener = null;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -108,17 +111,17 @@ public class QuestionActivity extends AppCompatActivity {
 
         list = new ArrayList<>();
 
+
         loadingDialog = new Dialog(this);
         loadingDialog.setContentView(R.layout.loading);
         loadingDialog.getWindow().setLayout(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
         loadingDialog.setCancelable(false);
 
+
+
         loadingDialog.show();
-        setsRef.child(category)
-                .child("questions")
-                .orderByChild("questionNum")
-                .equalTo(questionNum)
-                .addValueEventListener(new ValueEventListener() {
+
+        setsRefValueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot snap : snapshot.getChildren()) {
@@ -130,12 +133,9 @@ public class QuestionActivity extends AppCompatActivity {
                 if(list.size()>0){
 
                     for(int i=0;i<4;i++){
-                        optionsContainer.getChildAt(i).setOnClickListener(new View.OnClickListener() {
-                            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-                            @Override
-                            public void onClick(View v) {
-                                checkAnsw((Button)v);
-                            }
+                        optionsContainer.getChildAt(i).setOnClickListener(v -> {
+                            checkAnsw((Button)v);           //qui crasha perchè l'oggetto è ancora null ed io clicco sopra
+                                                            //per correggerlo metterlo quando finisce l'animazione
                         });
                     }
                     playAnim(question,0,list.get(position).getQuestion());
@@ -181,16 +181,22 @@ public class QuestionActivity extends AppCompatActivity {
                 Toast.makeText(QuestionActivity.this,error.getMessage(),Toast.LENGTH_SHORT).show();
                 loadingDialog.dismiss();
             }
-        });
+
+        };
+
+        setsRef.child(category)
+                .child("questions")
+                .orderByChild("questionNum")
+                .equalTo(questionNum)
+                .addListenerForSingleValueEvent(setsRefValueEventListener);
+
+                //nel leak abbiamo addValueEvent listner :
+                //addValueEventListener() keep listening to query or database reference it is attached to.
+                //But addListenerForSingleValueEvent() executes onDataChange method immediately and after executing that
+                //method once, it stops listening to the reference location it is attached to.
 
     }
 
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        storeBookmarks();
-    }
 
     private void playAnim(View view, int value, String data){
         view.animate().alpha(value).scaleX(value).scaleY(value).setDuration(350).setStartDelay(100).setInterpolator(new DecelerateInterpolator()).setListener(new Animator.AnimatorListener() {
@@ -268,6 +274,13 @@ public class QuestionActivity extends AppCompatActivity {
                 optionsContainer.getChildAt(i).setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#DADADA")));
             }
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(setsRefValueEventListener!=null)
+        setsRef.removeEventListener(setsRefValueEventListener);
     }
 
     private void getBookmarks(){

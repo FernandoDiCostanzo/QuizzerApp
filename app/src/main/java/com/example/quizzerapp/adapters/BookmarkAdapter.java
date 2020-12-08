@@ -35,7 +35,7 @@ public class BookmarkAdapter extends RecyclerView.Adapter<BookmarkAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.setData(questionModels.get(position).getImageUrl(),
-                questionModels.get(position).getCategory(),
+                questionModels.get(position).getCategory()+" "+questionModels.get(position).getQuestionNum(),
                 questionModels.get(position).getQuestion(),
                 questionModels.get(position).getCorrectAns(),
                 position);

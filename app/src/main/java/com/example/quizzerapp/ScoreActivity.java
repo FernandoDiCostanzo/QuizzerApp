@@ -46,12 +46,7 @@ public class ScoreActivity extends AppCompatActivity {
 
         score.setText(localScore+"/"+localTotal);
 
-        finish.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        finish.setOnClickListener(v -> finish());
 
     }
 }

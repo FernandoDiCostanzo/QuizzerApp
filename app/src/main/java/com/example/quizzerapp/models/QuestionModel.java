@@ -20,6 +20,7 @@ public class QuestionModel {
         this.category = category;
     }
 
+
     public int getQuestionNum() {
         return questionNum;
     }
