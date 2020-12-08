@@ -72,15 +72,12 @@ public class GridAdapter extends BaseAdapter {
             view = convertView;
         }
 
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent questionIntent = new Intent(parent.getContext(), QuestionActivity.class);
-                questionIntent.putExtra("category",category);
-                questionIntent.putExtra("sets",position+1);
-                questionIntent.putExtra("imageUrl",imageUrl);
-                parent.getContext().startActivity(questionIntent);
-            }
+        view.setOnClickListener(v -> {
+            Intent questionIntent = new Intent(parent.getContext(), QuestionActivity.class);
+            questionIntent.putExtra("category",category);
+            questionIntent.putExtra("sets",position+1);
+            questionIntent.putExtra("imageUrl",imageUrl);
+            parent.getContext().startActivity(questionIntent);
         });
 
         ((TextView)view.findViewById(R.id.textView)).setText(String.valueOf(position+1));

@@ -30,9 +30,9 @@ public class CategoryActivities extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private List<CategoryModel> categoryModels;
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference rootRef = database.getReference(Utility.ROOT_PATH);
-    DatabaseReference categoriesRef = rootRef.child(Utility.CATEGORY_PATH);
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference rootRef = database.getReference(Utility.ROOT_PATH);
+    private DatabaseReference categoriesRef = rootRef.child(Utility.CATEGORY_PATH);
 
     private Dialog loadingDialog;
 
@@ -49,7 +49,7 @@ public class CategoryActivities extends AppCompatActivity {
 
         loadingDialog = new Dialog(this);
         loadingDialog.setContentView(R.layout.loading);
-        loadingDialog.getWindow().setLayout(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+        loadingDialog.getWindow().setLayout(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         loadingDialog.setCancelable(false);
 
         recyclerView = findViewById(R.id.recyclerView);
@@ -65,6 +65,8 @@ public class CategoryActivities extends AppCompatActivity {
         recyclerView.setAdapter(categoryAdapter);
 
         loadingDialog.show();
+
+
         categoriesRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -78,14 +80,12 @@ public class CategoryActivities extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(CategoryActivities.this,error.getMessage(),Toast.LENGTH_SHORT);
+                Toast.makeText(CategoryActivities.this, error.getMessage(), Toast.LENGTH_SHORT);
                 loadingDialog.dismiss();
             }
         });
-
-
-
     }
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
