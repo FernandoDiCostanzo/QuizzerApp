@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">QuizzerApp</string>
+    <string name="app_name">Bechele</string>
     <string name="start_quitz">Start Quitz</string>
     <string name="bookmark">bookmark</string>
     <string name="title">Title</string>
-    <string name="sets">Sets</string>
+    <string name="sets">Difficulty levels</string>
     <string name="question">Question</string>
     <string name="_5_10">5/10</string>
     <string name="_1">1</string>

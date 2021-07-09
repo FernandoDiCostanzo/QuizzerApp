@@ -16,6 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
@@ -36,7 +37,7 @@
             android:layout_marginTop="150dp"
             android:layout_marginBottom="30dp"
             android:baseline="@dimen/activity_vertical_margin"
-            android:src="@drawable/ic_quizzer_logo" />
+            android:src="@drawable/bchele_logo_modificato" />
 
     </FrameLayout>
 
@@ -64,6 +65,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:targetApi="lollipop"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"/>
+
+    <Button
+        android:id="@+id/button_rec"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="Rec"
+        android:background="@drawable/button_rounded"
+        app:layout_constraintBottom_toTopOf="@+id/button_startQuitz"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"/>
 
