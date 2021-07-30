@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SplashScreenActivity"
-    android:background="@color/colorSecondary"
+    android:background="@drawable/rect_radient"
     android:layout_gravity="center">
 
     <TextView
@@ -63,9 +63,10 @@
         android:gravity="bottom|center"
         android:padding="10dp"
         android:text="Developed by : Di Costanzo Fernando"
-        android:background="@drawable/rect_radient"
+        android:background="@drawable/rect_gradient2"
         android:textStyle="italic"
         android:textSize="12sp"
+        android:textColor="@color/black"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -48,4 +48,11 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
     }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        finish();
+    }
 }

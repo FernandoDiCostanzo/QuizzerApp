@@ -68,8 +68,8 @@ public class RecAdapter extends RecyclerView.Adapter<RecAdapter.ViewHolder> {
                 public void onClick(View v) {
                     player = recModelsList.get(position).getPlayer();
                     int duration = player.getDuration();
+                    YoYo.with(Techniques.Pulse).duration(duration).playOn(playButton);
                     player.start();
-                    YoYo.with(Techniques.Shake).duration(duration).playOn(playButton);
                 }
             });
         }

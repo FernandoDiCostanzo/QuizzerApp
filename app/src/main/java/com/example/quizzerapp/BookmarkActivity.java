@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -58,8 +59,10 @@ public class BookmarkActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == android.R.id.home)
+        if(item.getItemId() == android.R.id.home) {
             finish();
+            onBackPressed();
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -83,5 +86,10 @@ public class BookmarkActivity extends AppCompatActivity {
         String json = gson.toJson(bookmarkList);
         editor.putString(Utility.KEY_NAME,json);
         editor.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(BookmarkActivity.this,MainActivity.class));
     }
 }

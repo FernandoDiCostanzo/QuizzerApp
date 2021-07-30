@@ -8,20 +8,28 @@ import android.os.Handler;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
+    boolean isFirstTime = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    isFirstTime = true;
+                    Intent i = new Intent(SplashScreenActivity.this, MainActivity.class);
+                    startActivity(i);
+                }
+            }, 2000);
+    }
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent i = new Intent(SplashScreenActivity.this,MainActivity.class);
-                startActivity(i);
-            }
-        },2000);
-
+    @Override
+    protected void onResume() {
+        if(isFirstTime) finish();
+        super.onResume();
 
     }
+
 }

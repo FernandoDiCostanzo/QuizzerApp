@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
-    android:padding="10dp">
+    android:padding="4dp">
 
 
     <Button
@@ -22,7 +22,7 @@
         android:text="@string/title"
         android:textAlignment="gravity"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="12sp"
         android:textStyle="normal">
 
     </Button>
@@ -30,7 +30,7 @@
     <ImageView
         android:id="@+id/imageView_recShare"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="47dp"
         android:layout_weight="1"
         android:background="#00781A1A"
 

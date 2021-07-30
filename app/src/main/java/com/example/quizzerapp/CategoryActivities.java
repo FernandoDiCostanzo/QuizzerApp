@@ -2,6 +2,7 @@ package com.example.quizzerapp;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -91,7 +92,14 @@ public class CategoryActivities extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == android.R.id.home){
             finish();
+            onBackPressed();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(CategoryActivities.this,MainActivity.class));
     }
 }

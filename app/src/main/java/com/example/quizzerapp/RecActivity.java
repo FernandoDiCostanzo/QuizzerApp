@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -82,6 +83,13 @@ public class RecActivity extends AppCompatActivity {
         recModels.add(new RecModel(this,"oh stiamo noi giù",R.raw.oh_stiamo_noi_giu));
         recModels.add(new RecModel(this,"ohh scendi!!",R.raw.ohhh_scendi));
         recModels.add(new RecModel(this,"t sfong!",R.raw.tsfong));
+        recModels.add(new RecModel(this,"Arriva...",R.raw.arriva));
+        recModels.add(new RecModel(this,"Bucchinà ma fuss strunz ?!",R.raw.bucchina_ma_fuss_strunz));
+        recModels.add(new RecModel(this,"Sei veramente straordinario!",R.raw.sei_veramente_straordinario));
+        recModels.add(new RecModel(this,"Urlo pazzo!",R.raw.urlo_pazzo));
+        recModels.add(new RecModel(this,"Urlo pazzo 2!",R.raw.urlo_pazzo_2));
+        recModels.add(new RecModel(this,"Uccidilo!",R.raw.uccidilo));
+        recModels.add(new RecModel(this,"Oh fratm",R.raw.oh_fratm));
 
         recAdapter.notifyDataSetChanged();
         loadingDialog.dismiss();
@@ -93,6 +101,12 @@ public class RecActivity extends AppCompatActivity {
         if(item.getItemId() == android.R.id.home){
             finish();
         }
+        startActivity(new Intent(this,MainActivity.class));
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(RecActivity.this,MainActivity.class));
     }
 }
