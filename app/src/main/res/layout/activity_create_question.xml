@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    tools:context=".CreateQuestionActivity">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_question"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/rect_gradient2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_question"
+        android:text="Seleziona categoria e livello di difficoltà"
+        android:textColor="@color/black"/>
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rect_gradient2"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/linear_loyout_CreateQuestion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_question">
+
+        <Spinner
+            android:id="@+id/spinnerCategory"
+            android:layout_width="180dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_margin="10dp" />
+
+
+        <Spinner
+            android:id="@+id/spinnerDifficulty"
+            android:layout_width="180dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:gravity="center" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/linear_loyout_CreateQuestion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        android:text="Inserisci la domanda con le relative risposte"
+        android:textColor="@color/black"/>
+
+    <LinearLayout
+        android:id="@+id/linear_loyout_CreateQuestion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="116dp"
+        android:background="@drawable/rect_gradient2"
+        android:gravity="top"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_question"
+        app:layout_constraintVertical_bias="0.118">
+
+
+        <EditText
+            android:id="@+id/textView_question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/item_bg"
+            android:backgroundTint="@color/white"
+            android:hint="@string/create_question"
+            android:inputType="text"
+            android:padding="16dp"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/textView_rispA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@drawable/item_bg"
+            android:backgroundTint="@color/white"
+            android:gravity="center"
+            android:hint="Inserisci la risposta A"
+            android:inputType="text"
+            android:textStyle="italic" />
+
+
+        <EditText
+            android:id="@+id/textView_rispB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@drawable/item_bg"
+            android:backgroundTint="@color/white"
+            android:gravity="center"
+            android:hint="Inserisci la risposta B"
+            android:inputType="text"
+            android:textStyle="italic" />
+
+
+        <EditText
+            android:id="@+id/textView_rispC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@drawable/item_bg"
+            android:backgroundTint="@color/white"
+            android:gravity="center"
+            android:hint="Inserisci la risposta C"
+            android:inputType="text"
+            android:textStyle="italic" />
+
+
+        <EditText
+            android:id="@+id/textView_rispD"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@drawable/item_bg"
+            android:backgroundTint="@color/white"
+            android:gravity="center"
+            android:hint="Inserisci la risposta D"
+            android:inputType="text"
+            android:textStyle="italic" />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Seleziona la risposta corretta"
+        android:layout_margin="5dp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/linear_loyout_CreateQuestion" />
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rect_gradient2"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/sendQuestionBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linear_loyout_CreateQuestion"
+        app:layout_constraintVertical_bias="0.642">
+
+        <RadioGroup
+            android:id="@+id/radioGroupCorrectAnsw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="A" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="B" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="C" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="D" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/sendQuestionBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@drawable/button_rounded"
+        android:text="Invia la domanda"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linear_loyout_CreateQuestion"
+        app:layout_constraintVertical_bias="0.74"></Button>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

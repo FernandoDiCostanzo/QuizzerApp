@@ -31,6 +31,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.core.operation.Operation;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -71,6 +72,7 @@ public class QuestionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
 
+
         Toolbar toolbar = findViewById(R.id.toolbar_question);
         setSupportActionBar(toolbar);
 
@@ -89,6 +91,7 @@ public class QuestionActivity extends AppCompatActivity {
         noIndicator = findViewById(R.id.textView_number_indicator);
         bookmarkBtn = findViewById(R.id.btn_bookmark);
         optionsContainer = findViewById(R.id.linearLayout_options);
+        optionsContainer.setEnabled(false);
         shareBtn = findViewById(R.id.button_share);
         nextBtn = findViewById(R.id.button_next);
         textCategory = findViewById(R.id.textView_category);
@@ -107,6 +110,8 @@ public class QuestionActivity extends AppCompatActivity {
         });
 
         list = new ArrayList<>();
+
+
 
         loadingDialog = new Dialog(this);
         loadingDialog.setContentView(R.layout.loading);
@@ -248,16 +253,19 @@ public class QuestionActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void checkAnsw(Button selectedOption){
+
         enableOption(false);
         nextBtn.setEnabled(true);
         nextBtn.setAlpha(1);
-        if(selectedOption.getText().equals(list.get(position).getCorrectAns())){
+        if (selectedOption.getText().equals(list.get(position).getCorrectAns())) {
             score++;
             selectedOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00FF33")));
-        }else{
+        } else {
             selectedOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#E62A2A")));
-            Button correctOption = (Button)optionsContainer.findViewWithTag(list.get(position).getCorrectAns());
-            correctOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00FF33")));
+            Button correctOption = (Button) optionsContainer.findViewWithTag(list.get(position).getCorrectAns());
+            if (correctOption != null)
+                correctOption.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00FF33")));
+
         }
     }
 

@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private Button startButton;
     private Button bookMarkButton;
     private Button recButton;
+    private Button createQuestionBtn;
 
 
     @Override
@@ -30,8 +31,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         startButton = findViewById(R.id.button_startQuitz);
-        bookMarkButton = findViewById(R.id.button_bookmark);
+        bookMarkButton = findViewById(R.id.btn_bookmark);
         recButton = findViewById(R.id.button_rec);
+        createQuestionBtn = findViewById(R.id.create_question);
 
         this.recButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this,RecActivity.class);
@@ -45,6 +47,11 @@ public class MainActivity extends AppCompatActivity {
 
         this.bookMarkButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, BookmarkActivity.class);
+            startActivity(intent);
+        });
+
+        this.createQuestionBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, CreateQuestionActivity.class);
             startActivity(intent);
         });
     }

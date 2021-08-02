@@ -9,9 +9,11 @@
         android:roundIcon="@drawable/bchele_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".SplashScreenActivity" android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        <activity android:name=".CreateQuestionActivity"></activity>
+        <activity
+            android:name=".SplashScreenActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>
-
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />

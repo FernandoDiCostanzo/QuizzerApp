@@ -1,5 +1,9 @@
 package com.example.quizzerapp.models;
 
+import androidx.annotation.NonNull;
+
+import org.jetbrains.annotations.NotNull;
+
 public class QuestionModel {
     private String imageUrl,category,question,optionA,optionB, optionC, optionD, correctAns;
     private int questionNum;
@@ -91,5 +95,18 @@ public class QuestionModel {
 
     public void setCorrectAns(String correctAns) {
         this.correctAns = correctAns;
+    }
+
+    @NonNull
+    @NotNull
+    @Override
+    public String toString() {
+        return "Category :" + category + "\n"
+                + "Num :" + questionNum + "\n"
+                + "RispA :" + optionA + "\n"
+                + "RispB :" + optionB + "\n"
+                + "RispC :" + optionC + "\n"
+                + "RispD :" + optionD + "\n"
+                + "CorrectAns :" + correctAns + "\n";
     }
 }

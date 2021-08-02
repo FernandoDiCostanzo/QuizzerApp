@@ -5,25 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SplashScreenActivity"
-    android:background="@drawable/rect_radient"
+    android:background="@color/white"
     android:layout_gravity="center">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Benvenuto nel magico modo di..."
-        android:textColor="@color/white"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toTopOf="@+id/imageViewSplash"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:padding="4dp"
-        android:textSize="20sp">
 
-
-    </TextView>
 
 
     <ImageView
@@ -40,13 +25,12 @@
         tools:srcCompat="@drawable/bchele_logo_modificato" />
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
+        android:id="@+id/textViewBCHELE"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-thin"
         android:text="Bechele"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/white"
         android:textSize="80sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -55,7 +39,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewSplash"
         app:layout_constraintVertical_bias="0.256"
-        tools:text="Bchele" />
+        tools:text="Bchele"
+        android:textColor="@color/cardview_dark_background"
+        android:gravity="bottom|center"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -63,7 +49,6 @@
         android:gravity="bottom|center"
         android:padding="10dp"
         android:text="Developed by : Di Costanzo Fernando"
-        android:background="@drawable/rect_gradient2"
         android:textStyle="italic"
         android:textSize="12sp"
         android:textColor="@color/black"
