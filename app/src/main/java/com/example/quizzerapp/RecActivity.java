@@ -13,21 +13,10 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.example.quizzerapp.adapters.RecAdapter;
-import com.example.quizzerapp.helpers.Utility;
-import com.example.quizzerapp.models.CategoryModel;
 import com.example.quizzerapp.models.RecModel;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,13 +70,18 @@ public class RecActivity extends AppCompatActivity {
         recModels.add(new RecModel(this,"Intant...",R.raw.intant));
         recModels.add(new RecModel(this,"Oh ma si strunz",R.raw.oh_ma_si_strunz));
         recModels.add(new RecModel(this,"oh stiamo noi giù",R.raw.oh_stiamo_noi_giu));
-        recModels.add(new RecModel(this,"ohh scendi!!",R.raw.ohhh_scendi));
+        recModels.add(new RecModel(this,"ohh scendi arrabbiato!",R.raw.ohhh_scendi_arrabiato));
+        recModels.add(new RecModel(this,"ohh scendi",R.raw.ohh_scendi));
         recModels.add(new RecModel(this,"t sfong!",R.raw.tsfong));
         recModels.add(new RecModel(this,"Arriva...",R.raw.arriva));
         recModels.add(new RecModel(this,"Bucchinà ma fuss strunz ?!",R.raw.bucchina_ma_fuss_strunz));
         recModels.add(new RecModel(this,"Sei veramente straordinario!",R.raw.sei_veramente_straordinario));
         recModels.add(new RecModel(this,"Urlo pazzo!",R.raw.urlo_pazzo));
-        recModels.add(new RecModel(this,"Urlo pazzo 2!",R.raw.urlo_pazzo_2));
+        recModels.add(new RecModel(this,"Urlo più pazzo!",R.raw.urlo_pazzo_2));
+        recModels.add(new RecModel(this,"Bha...",R.raw.bha));
+        recModels.add(new RecModel(this,"Omm e spaccimm",R.raw.omm_e_spaccimm));
+        recModels.add(new RecModel(this,"Quant !?",R.raw.quant));
+        recModels.add(new RecModel(this,"Uau...",R.raw.uau));
         recModels.add(new RecModel(this,"Uccidilo!",R.raw.uccidilo));
         recModels.add(new RecModel(this,"Oh fratm",R.raw.oh_fratm));
 
